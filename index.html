@@ -53,7 +53,7 @@
             font-size: 1em;
             cursor: pointer;
             text-align: center;
-            padding: 4px;
+            padding: 0;
             box-sizing: border-box;
         }
 
@@ -72,6 +72,11 @@
         .card.wrong {
             border-color: red;
             background-color: #ffe0e0;
+        }
+
+        .card.matched {
+            border-color: #2ecc71;
+            background-color: #d4f7e7;
         }
 
         .card.empty {
@@ -228,18 +233,21 @@
             const imageCard = card1.dataset.type === "image" ? card1 : card2;
             const wordCard = card1.dataset.type === "word" ? card1 : card2;
 
+            card1.classList.add("matched");
+            card2.classList.add("matched");
+
             stacks.images[imageCard.dataset.stack].shift();
             stacks.words[wordCard.dataset.stack].shift();
 
             selected = null;
+            
 
-            // Check win condition
-            if (stacks.images.every(s => s.length === 0)) {
-                endGame(true);
-                return;
-            }
-
-            refreshBoard();
+            setTimeout(() => {
+                refreshBoard();
+                if (stacks.images.every(s => s.length === 0)) {
+                    endGame(true);
+                }
+            }, 300);
         }
 
         function handleMismatch(card1, card2) {
