@@ -52,6 +52,79 @@
             to { opacity: 0.5; }
         }
 
+        #end-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        #end-content {
+            background: white;
+            border-radius: 20px;
+            padding: 32px 24px;
+            max-width: 300px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #end-title {
+            font-size: 2em;
+            margin: 0;
+            color: #333;
+        }
+
+        #end-stats {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1em;
+        }
+
+        .stat-label {
+            color: #666;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .stat-divider {
+            height: 1px;
+            background: #eee;
+            margin: 4px 0;
+        }
+
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 101;
+        }
+
         #game-board {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -171,6 +244,32 @@
         <button class="mode-button" onclick="startGame()" style="margin: 20px 0">▶️ Start Game</button>
     </div>
     <div id="game-board" style="display:none"></div>
+    <div id="end-screen" style="display:none">
+        <div id="end-content">
+            <h2 id="end-title"></h2>
+            <div id="end-stats">
+                <div class="stat-row">
+                    <span class="stat-label">Matches</span>
+                    <span class="stat-value" id="end-matches"></span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Time Remaining</span>
+                    <span class="stat-value" id="end-time"></span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-row">
+                    <span class="stat-label">Final Score</span>
+                    <span class="stat-value" id="end-score"></span>
+                </div>
+                <div class="stat-row" id="personal-best-row">
+                    <span class="stat-label">Personal Best</span>
+                    <span class="stat-value" id="end-personal-best"></span>
+                </div>
+            </div>
+            <button class="mode-button" onclick="resetGame()">Play Again</button>
+        </div>
+        <canvas id="confetti-canvas" style="display:none"></canvas>
+    </div>
 
     <script src="words.js"></script>
     <script>
@@ -386,10 +485,29 @@
         function endGame(won) {
             gameActive = false;
             clearInterval(timerInterval);
-            const msg = won
-                ? "You win! Time remaining: " + document.getElementById("timer").textContent
-                : "Time's up! You matched " + score + " pairs.";
-            setTimeout(() => alert(msg), 100);
+
+            const finalScore = score + timeLeft;
+
+            // Personal best
+            const pbKey = "pb_" + selectedMode;
+            const prevBest = parseInt(localStorage.getItem(pbKey)) || 0;
+            const isNewBest = finalScore > prevBest;
+            if (isNewBest) localStorage.setItem(pbKey, finalScore);
+
+            // Populate end screen
+            document.getElementById("end-title").textContent = won ? "🎉 Cleared!" : "😅 Oh no! Time expired!";
+            document.getElementById("end-matches").textContent = score;
+            document.getElementById("end-time").textContent = timeLeft + "s";
+            document.getElementById("end-score").textContent = finalScore;
+            document.getElementById("end-personal-best").textContent = 
+                isNewBest ? prevBest > 0 ? "New best! 🏆" : "First run! 🏆" : prevBest;
+
+            // Show end screen
+            document.getElementById("game-board").style.display = "none";
+            document.getElementById("hud").style.display = "none";
+            document.getElementById("end-screen").style.display = "flex";
+
+            if (won) launchConfetti();
         }
 
         // --- Start ---
@@ -469,6 +587,70 @@
                 }
             });
         }
+
+
+        function launchConfetti() {
+            const canvas = document.getElementById("confetti-canvas");
+            canvas.style.display = "block";
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const pieces = Array.from({ length: 150 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * -canvas.height,
+                size: Math.random() * 8 + 4,
+                color: ["#e05c2a", "#4a90e2", "#2ecc71", "#f1c40f", "#e91e63"][Math.floor(Math.random() * 5)],
+                speed: Math.random() * 3 + 2,
+                angle: Math.random() * Math.PI * 2,
+                spin: (Math.random() - 0.5) * 0.2,
+                wobble: Math.random() * 0.05
+            }));
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                pieces.forEach(p => {
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.angle);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+                    p.y += p.speed;
+                    p.x += Math.sin(p.angle) * 2;
+                    p.angle += p.spin;
+                    if (p.y > canvas.height) {
+                        p.y = -10;
+                        p.x = Math.random() * canvas.width;
+                    }
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+    function resetGame() {
+        // Reset state
+        score = 0;
+        timeLeft = TOTAL_TIME;
+        selected = null;
+        gameActive = false;
+
+        // Hide end screen and confetti
+        document.getElementById("end-screen").style.display = "none";
+        document.getElementById("confetti-canvas").style.display = "none";
+
+        // Reset HUD
+        document.getElementById("timer").textContent = "1:45";
+        document.getElementById("timer").classList.remove("warning");
+        document.getElementById("score").textContent = "Matches: 0";
+        document.getElementById("hud").style.display = "flex";
+
+        // Go back to title screen
+        document.getElementById("title-screen").style.display = "flex";
+        document.getElementById("title-screen").style.flexDirection = "column";
+        document.getElementById("game-board").style.display = "none";
+    }
 
     </script>
 </body>
