@@ -402,10 +402,6 @@
             </div>
         </div>
     </div>
-    <div id="mode-buttons" style="display:none">
-        <button class="mode-button" onclick="launchPreview()">👀 Preview & Play</button>
-        <button class="mode-button" onclick="startGame()">▶️ Play</button>
-    </div>
     <div id="preview-screen" style="display:none">
         <div id="preview-grid"></div>
         <button class="mode-button" onclick="startGame()" style="margin: 20px 0">▶️ Start Game</button>
@@ -457,7 +453,6 @@
         let timerInterval = null;
         let gameActive = false;
         let selectedMode = "noun";
-        let round = [];
         let layerTemplates = [];
 
         function buildRound() {
@@ -551,23 +546,6 @@
             
             stacks.images = imageDeck;
             stacks.words = wordDeck;
-        }
-
-        // --- Render the board ---
-        function renderBoard() {
-            const board = document.getElementById("game-board");
-            board.innerHTML = "";
-
-            // Image columns (left 5)
-            for (let i = 0; i < NUM_STACKS; i++) {
-                const col = document.createElement("div");
-                col.className = "column";
-
-                const card = createImageCard(i);
-                col.appendChild(card);
-                board.appendChild(col);
-            }
-
         }
 
         function createImageCard(stackIndex) {
@@ -739,17 +717,6 @@
             if (won) launchConfetti();
         }
 
-        // --- Start ---
-        function startGame_old(mode) {
-            document.getElementById("title-screen").style.display = "none";
-            document.getElementById("game-board").style.display = "grid";
-            document.getElementById("hud").style.display = "flex";
-            selectedMode = mode;
-            buildDeck();
-            refreshBoard();
-            gameActive = true;
-            startTimer();
-        }
 
         function selectMode(mode) {
             selectedMode = mode;
@@ -765,7 +732,6 @@
 
         function startGame() {
             document.getElementById("title-screen").style.display = "none";
-            document.getElementById("mode-buttons").style.display = "none";
             document.getElementById("preview-screen").style.display = "none";
             document.getElementById("game-board").style.display = "grid";
             document.getElementById("hud").style.display = "flex";
