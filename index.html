@@ -298,39 +298,97 @@
         let gameActive = false;
         let selectedMode = "noun";
         let round = [];
+        let layerTemplates = [];
 
         function buildRound() {
             const filtered = words.filter(w => w.type === selectedMode);
-            round = [];
-            for (let i = 0; i < ROUND_SIZE; i++) {
-                round.push(filtered[Math.floor(Math.random() * filtered.length)]);
+            
+            // Determine subset size - target 30, biggest multiple of 5 that's <= 30 and <= bank size
+            const maxSubset = Math.min(30, filtered.length);
+            const subsetSize = Math.floor(maxSubset / NUM_STACKS) * NUM_STACKS;
+            
+            // Build synonym-safe word subset
+            const subset = [];
+            const candidates = [...filtered].sort(() => Math.random() - 0.5);
+            
+            for (const candidate of candidates) {
+                if (subset.length >= subsetSize) break;
+                
+                // Bidirectional synonym check
+                const candidateAccepts = candidate.images.flatMap(img => img.accepts || [candidate.word]);
+                
+                const conflict = subset.some(chosen => {
+                    const chosenAccepts = chosen.images.flatMap(img => img.accepts || [chosen.word]);
+                    return candidateAccepts.includes(chosen.word) || 
+                        chosenAccepts.includes(candidate.word);
+                });
+                
+                if (!conflict) subset.push(candidate);
+            }
+            
+            // Assign fixed stack positions - divide subset into layer templates
+            // Shuffle subset first so stack assignment is random
+            const shuffledSubset = [...subset].sort(() => Math.random() - 0.5);
+            
+            // Build layer templates - each is an array of NUM_STACKS words
+            layerTemplates = [];
+            for (let i = 0; i < shuffledSubset.length; i += NUM_STACKS) {
+                layerTemplates.push(shuffledSubset.slice(i, i + NUM_STACKS));
             }
         }
 
         function buildDeck() {
+            // Initialize empty stacks
             const imageDeck = Array.from({ length: NUM_STACKS }, () => []);
             const wordDeck = Array.from({ length: NUM_STACKS }, () => []);
-
-            for (let i = 0; i < round.length; i += NUM_STACKS) {
-                const layer = round.slice(i, i + NUM_STACKS);
-                const positions = [...Array(NUM_STACKS).keys()].sort(() => Math.random() - 0.5);
+            
+            const totalLayers = ROUND_SIZE / NUM_STACKS; // 18 layers for 90 pairs
+            let layersDealt = 0;
+            let shuffledLayers = [...layerTemplates].sort(() => Math.random() - 0.5);
+            let layerIndex = 0;
+            let topLayerTemplate = null;
+            
+            while (layersDealt < totalLayers) {
+                // Reshuffle when we run out of layers
+                if (layerIndex >= shuffledLayers.length) {
+                    shuffledLayers = [...layerTemplates].sort(() => Math.random() - 0.5);
+                    layerIndex = 0;
+                    
+                    // Make sure first layer of new shuffle doesn't match current top layer
+                    if (topLayerTemplate && shuffledLayers[0] === topLayerTemplate && shuffledLayers.length > 1) {
+                        // Swap with a random other layer
+                        const swapIdx = Math.floor(Math.random() * (shuffledLayers.length - 1)) + 1;
+                        [shuffledLayers[0], shuffledLayers[swapIdx]] = 
+                            [shuffledLayers[swapIdx], shuffledLayers[0]];
+                    }
+                }
+                
+                const layer = shuffledLayers[layerIndex++];
+                topLayerTemplate = layer;
+                
+                // Shuffle word positions within this layer for the word deck
                 const wordPositions = [...Array(NUM_STACKS).keys()].sort(() => Math.random() - 0.5);
-
+                
                 layer.forEach((item, idx) => {
+                    // Pick random image for this appearance
                     const randomImage = item.images[Math.floor(Math.random() * item.images.length)];
-                    imageDeck[positions[idx]].push({
+                    const accepts = randomImage.accepts || [item.word];
+                    
+                    imageDeck[idx].push({
                         word: item.word,
                         file: randomImage.file,
-                        accepts: randomImage.accepts || [item.word]
+                        accepts: accepts
                     });
                     wordDeck[wordPositions[idx]].push({
                         word: item.word,
                         file: randomImage.file,
-                        accepts: randomImage.accepts || [item.word]
+                        accepts: accepts
                     });
                 });
+                
+                layersDealt++;
             }
-
+            
             stacks.images = imageDeck;
             stacks.words = wordDeck;
         }
@@ -562,13 +620,8 @@
             const grid = document.getElementById("preview-grid");
             grid.innerHTML = "";
 
-            // Get unique words from round
-            const seen = new Set();
-            const uniqueWords = round.filter(item => {
-                if (seen.has(item.word)) return false;
-                seen.add(item.word);
-                return true;
-            });
+            // Get unique words from layerTemplates - flatten the 2D array
+            const uniqueWords = layerTemplates.flat();
 
             uniqueWords.forEach(item => {
                 // Word card
