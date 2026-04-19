@@ -13,21 +13,31 @@
             align-items: center;
             background-color: #fdf6ef;
             margin: 0;
-            padding: 20px;
+            padding: 12px 20px;
+            min-height: 100dvh;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gap: 8px;
+            --hud-height: 52px;
+            --hud-margin: 12px;
+            --body-padding: 24px;
+            --card-size: calc((100dvh - var(--hud-height) - var(--hud-margin) - var(--body-padding) - (4 * var(--gap))) / 5);
         }
 
        #hud {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
-            max-width: 225px;
+            width: calc(var(--card-size) * 2 + var(--gap));
+            height: var(--hud-height);
             background: white;
             border-radius: 16px;
-            padding: 10px 16px;
+            padding: 0 16px;
             box-sizing: border-box;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-bottom: 12px;
+            margin-bottom: var(--hud-margin);
         }
 
         #timer {
@@ -129,14 +139,13 @@
         #game-board {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            max-width: 225px;
-            width: 100%;
+            gap: var(--gap);
+            width: calc(var(--card-size) * 2 + var(--gap));
         }
 
         .card {
-            width: 100%;
-            aspect-ratio: 1;
+            width: var(--card-size);
+            height: var(--card-size);
             min-height: 0;
             overflow: hidden;
             font-family: 'Nunito', sans-serif;
