@@ -516,6 +516,12 @@
 
         </div>
 
+        <div id="theme-selector" style="display:none; width:100%">
+            <select id="theme-dropdown" onchange="onThemeChange()" style="width:100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #eee; font-family: 'Nunito', sans-serif; font-size: 0.95rem; color: #555; background: white; cursor: pointer;">
+                <option value="all">All Words</option>
+            </select>
+        </div>
+
         <button class="secondary-button" onclick="showStats()" style="width:100%">📊 Stats</button>
 
         <div id="play-buttons" style="display:none">
@@ -655,6 +661,7 @@
         let timerInterval = null;
         let gameActive = false;
         let selectedMode = "noun";
+        let selectedTheme = "all";
         let layerTemplates = [];
         let confettiActive = false;
         let misses = 0;
@@ -700,7 +707,11 @@
         }
 
         function buildRound() {
-            const filtered = words.filter(w => w.type === selectedMode);
+            const filtered = words.filter(w => {
+                if (w.type !== selectedMode) return false;
+                if (selectedTheme === "all") return true;
+                return w.themes && w.themes.includes(selectedTheme);
+            });
             
             // Determine subset size - target 30, biggest multiple of 5 that's <= 30 and <= bank size
             const maxSubset = Math.min(30, filtered.length);
@@ -967,10 +978,41 @@
             if (won) launchConfetti();
         }
 
+        function populateThemeDropdown() {
+            const select = document.getElementById("theme-dropdown");
+            select.value = "all";
+            
+            // Collect all unique themes from words matching current mode
+            const modeWords = words.filter(w => w.type === selectedMode);
+            const themeSet = new Set();
+            modeWords.forEach(w => {
+                if (w.themes) w.themes.forEach(t => themeSet.add(t));
+            });
+            
+            // Clear existing options except "All Words"
+            select.innerHTML = '<option value="all">All Words</option>';
+            
+            // Sort themes alphabetically and add
+            [...themeSet].sort().forEach(theme => {
+                const option = document.createElement("option");
+                option.value = theme;
+                option.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+                select.appendChild(option);
+            });
+        }
+
+        function onThemeChange() {
+            selectedTheme = document.getElementById("theme-dropdown").value;
+            buildRound();
+        }
+
 
         function selectMode(mode) {
             selectedMode = mode;
+            selectedTheme = "all";
+            populateThemeDropdown();
             buildRound();
+            document.getElementById("theme-selector").style.display = "block";
             document.getElementById("play-buttons").style.display = "flex";
         }
 
@@ -1078,6 +1120,8 @@
         selected = null;
         gameActive = false;
         misses = 0;
+        selectedTheme = "all";
+        document.getElementById("theme-selector").style.display = "none";
 
         // Hide end screen and confetti
         confettiActive = false;

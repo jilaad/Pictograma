@@ -5,7 +5,8 @@ const words = [
         { file: "images/drawer03.jpg" },
         { file: "images/drawer04.jpg" }
     ]},
-    { word: "horno", type: "noun", images: [
+    { word: "horno", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/oven01.jpg" },
         { file: "images/oven02.jpg" },
         { file: "images/oven03.jpg" },
@@ -29,7 +30,8 @@ const words = [
         { file: "images/door03.jpg" },
         { file: "images/door04.jpg" }
     ]},
-    { word: "silla", type: "noun", images: [
+    { word: "silla", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/chair01.jpg" },
         { file: "images/chair02.jpg" },
         { file: "images/chair03.jpg" },
@@ -41,19 +43,22 @@ const words = [
         { file: "images/sun03.jpg" },
         { file: "images/sun04.jpg" }
     ]},
-    { word: "taza", type: "noun", images: [
+    { word: "taza", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/mug01.jpg" },
         { file: "images/mug02.jpg" },
         { file: "images/mug03.jpg" },
         { file: "images/mug04.jpg" }
     ]},
-    { word: "tenedor", type: "noun", images: [
+    { word: "tenedor", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/fork01.jpg" },
         { file: "images/fork02.jpg" },
         { file: "images/fork03.jpg" },
         { file: "images/fork04.jpg" }
     ]},
-    { word: "vaso", type: "noun", images: [
+    { word: "vaso", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/drinking_glass01.jpg" },
         { file: "images/drinking_glass02.jpg" },
         { file: "images/drinking_glass03.jpg" },
@@ -67,117 +72,138 @@ const words = [
         { file: "images/water03.jpg" },
         { file: "images/water04.jpg" }
     ]},
-    { word: "tarjeta de crédito", type: "noun", images: [
+    { word: "tarjeta de crédito", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/credit_card01.jpg" },
         { file: "images/credit_card02.jpg" },
         { file: "images/credit_card03.jpg" }
     ]},
-    { word: "camarero", type: "noun", images: [
+    { word: "camarero", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/waiter01.jpg", accepts: ["camarero","mesero"]},
         { file: "images/waiter02.jpg", accepts: ["camarero","mesero"]},
         { file: "images/waiter03.jpg", accepts: ["camarero","mesero"]},
         { file: "images/waiter04.jpg", accepts: ["camarero","mesero"]}
     ]},
-    { word: "mesero", type: "noun", images: [
+    { word: "mesero", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/waiter01.jpg", accepts: ["camarero","mesero"]},
         { file: "images/waiter02.jpg", accepts: ["camarero","mesero"]},
         { file: "images/waiter03.jpg", accepts: ["camarero","mesero"]},
         { file: "images/waiter04.jpg", accepts: ["camarero","mesero"]}
     ]},
-    { word: "mesa", type: "noun", images: [
+    { word: "mesa", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/table01.jpg" },
         { file: "images/table02.webp" },
         { file: "images/table03.jpg" },
         { file: "images/table04.jpg" }
     ]},
-    { word: "cabina", type: "noun", images: [
+    { word: "cabina", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/booth01.webp" },
         { file: "images/booth02.png" },
         { file: "images/booth03.jpg" },
         { file: "images/booth04.webp" }
     ]},
-    { word: "servilleta", type: "noun", images: [
+    { word: "servilleta", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/napkin01.jpg" },
         { file: "images/napkin02.webp" },
         { file: "images/napkin03.webp" },
         { file: "images/napkin04.webp" }
     ]},
-    { word: "cuchara", type: "noun", images: [
+    { word: "cuchara", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/spoon01.jpg" },
         { file: "images/spoon02.webp" },
         { file: "images/spoon03.jpg" },
         { file: "images/spoon04.webp" }
     ]},
-    { word: "cuchillo", type: "noun", images: [
+    { word: "cuchillo", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/knife01.jpg" },
         { file: "images/knife02.webp" },
         { file: "images/knife03.webp" },
         { file: "images/knife04.webp" }
     ]},
-    { word: "menú", type: "noun", images: [
+    { word: "menú", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/menu01.webp" },
         { file: "images/menu02.webp" },
         { file: "images/menu04.jpg" }
     ]},
-    { word: "cuenta", type: "noun", images: [
+    { word: "cuenta", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/check_bill01.jpg" },
         { file: "images/check_bill03.jpg" },
         { file: "images/check_bill04.jpg" }
     ]},
-    { word: "plato", type: "noun", images: [
+    { word: "plato", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/plate01.webp" },
         { file: "images/plate02.jpg" },
         { file: "images/plate03.webp" },
         { file: "images/plate04.jpg" }
     ]},
-    { word: "tazón", type: "noun", images: [
+    { word: "tazón", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/bowl01.webp" },
         { file: "images/bowl02.webp" }
     ]},
-    { word: "bufé", type: "noun", images: [
+    { word: "bufé", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/buffet01.jpg" },
         { file: "images/buffet02.webp" }
     ]},
-    { word: "cocinero", type: "noun", images: [
+    { word: "cocinero", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/cook01.jpg" },
         { file: "images/cook02.jpg" },
         { file: "images/cook03.jpg" }
     ]},
-    { word: "botella", type: "noun", images: [
+    { word: "botella", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/bottle01.jpg" },
         { file: "images/bottle02.jpg" },
         { file: "images/bottle03.jpg" },
         { file: "images/bottle04.jpg" }
     ]},
-    { word: "bandeja", type: "noun", images: [
+    { word: "bandeja", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/tray02.jpg" },
         { file: "images/tray03.jpg" }
     ]},
-    { word: "propina", type: "noun", images: [
+    { word: "propina", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/tip_money01.jpg" },
         { file: "images/tip_money02.jpg" },
         { file: "images/tip_money03.jpg" },
         { file: "images/tip_money04.jpg" }
     ]},
-    { word: "recibo", type: "noun", images: [
+    { word: "recibo", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/receipt01.jpg" },
         { file: "images/receipt02.jpg" },
         { file: "images/receipt03.jpg" },
         { file: "images/receipt04.jpg" }
     ]},
-    { word: "cocina", type: "noun", images: [
+    { word: "cocina", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/kitchen01.jpg" },
         { file: "images/kitchen02.jpg" },
         { file: "images/kitchen03.jpg" },
         { file: "images/kitchen04.jpg" }
     ]},
-    { word: "baño", type: "noun", images: [
+    { word: "baño", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/bathroom01.jpg" },
         { file: "images/bathroom02.jpg" },
         { file: "images/bathroom03.jpg" },
         { file: "images/bathroom04.jpg" }
     ]},
-    { word: "parrilla", type: "noun", images: [
+    { word: "parrilla", type: "noun", themes: ["restaurant", "kitchen"],
+        images: [
         { file: "images/grill01.jpg" },
         { file: "images/grill02.jpg" },
         { file: "images/grill03.jpg" },
@@ -189,19 +215,22 @@ const words = [
         { file: "images/walking03.jpg" },
         { file: "images/walking04.jpg" }
     ]},
-    { word: "cortar", type: "verb", images: [
+    { word: "cortar", type: "verb", themes: ["kitchen"],
+        images: [
         { file: "images/cutting01.jpg" },
         { file: "images/cutting02.jpg" },
         { file: "images/cutting03.jpg" },
         { file: "images/cutting04.jpg" }
     ]},
-    { word: "cenar", type: "verb", images: [
+    { word: "cenar", type: "verb", themes: ["restaurant"],
+        images: [
         { file: "images/dinnering01.jpg" },
         { file: "images/dinnering02.jpg" },
         { file: "images/dinnering03.jpg" },
         { file: "images/dinnering04.jpg" }
     ]},
-    { word: "desayunar", type: "verb", images: [
+    { word: "desayunar", type: "verb", themes: ["restaurant"],
+        images: [
         { file: "images/breakfasting01.jpg" },
         { file: "images/breakfasting02.jpg" },
         { file: "images/breakfasting03.jpg" },
@@ -219,7 +248,8 @@ const words = [
         { file: "images/driving03.jpg", accepts: ["conducir","manejar"] },
         { file: "images/driving04.jpg", accepts: ["conducir","manejar"] }
     ]},
-    { word: "pagar", type: "verb", images: [
+    { word: "pagar", type: "verb", themes: ["restaurant"],
+        images: [
         { file: "images/paying01.jpg" },
         { file: "images/paying02.jpg" },
         { file: "images/paying03.jpg" },
@@ -241,76 +271,89 @@ const words = [
         { file: "images/lighting_like_fire03.jpg" },
         { file: "images/lighting_like_fire04.jpg" }
     ]},
-    { word: "chuletón", type: "noun", images: [
+    { word: "chuletón", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/ribeye01.jpg" },
         { file: "images/ribeye02.jpg" },
         { file: "images/ribeye03.jpg" },
         { file: "images/ribeye04.jpg" }
     ]},
-    { word: "solomillo", type: "noun", images: [
+    { word: "solomillo", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/sirloin01.jpg" },
         { file: "images/sirloin02.jpg" },
         { file: "images/sirloin03.jpg" },
         { file: "images/sirloin04.jpg" }
     ]},
-    { word: "ajo", type: "noun", images: [
+    { word: "ajo", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/garlic01.jpg" },
         { file: "images/garlic02.jpg" },
         { file: "images/garlic03.jpg" }
     ]},
-    { word: "cebolla", type: "noun", images: [
+    { word: "cebolla", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/onion01.jpg" },
         { file: "images/onion02.jpg" },
         { file: "images/onion03.jpg" },
         { file: "images/onion04.jpg" }
     ]},
-    { word: "mantequilla", type: "noun", images: [
+    { word: "mantequilla", type: "noun", themes: ["restaurant","kitchen"],
+        images: [
         { file: "images/butter01.jpg" },
         { file: "images/butter02.jpg" },
         { file: "images/butter03.jpg" },
         { file: "images/butter04.jpg" }
     ]},
-    { word: "lechuga", type: "noun", images: [
+    { word: "lechuga", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/lettuce01.jpg" },
         { file: "images/lettuce02.jpg" },
         { file: "images/lettuce03.jpg" },
         { file: "images/lettuce04.jpg" }
     ]},
-    { word: "zanahoria", type: "noun", images: [
+    { word: "zanahoria", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/carrot01.jpg" },
         { file: "images/carrot02.jpg" },
         { file: "images/carrot03.jpg" },
         { file: "images/carrot04.jpg" }
     ]},
-    { word: "champiñón", type: "noun", images: [
+    { word: "champiñón", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/mushroom01.jpg" },
         { file: "images/mushroom02.jpg" },
         { file: "images/mushroom03.jpg" },
         { file: "images/mushroom04.jpg" }
     ]},
-    { word: "maíz", type: "noun", images: [
+    { word: "maíz", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/corn01.jpg" },
         { file: "images/corn02.jpg" },
         { file: "images/corn03.jpg" },
         { file: "images/corn04.jpg" }
     ]},
-    { word: "pimiento", type: "noun", images: [
+    { word: "pimiento", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/bell_pepper01.jpg" },
         { file: "images/bell_pepper02.jpg" },
         { file: "images/chili_pepper01.jpg" },
         { file: "images/chili_pepper02.jpg" }
     ]},
-    { word: "pimienta", type: "noun", images: [
+    { word: "pimienta", type: "noun", themes: ["restaurant","kitchen"],
+        images: [
         { file: "images/black_pepper01.jpg" },
         { file: "images/black_pepper02.jpg" },
         { file: "images/black_pepper03.jpg" }
     ]},
-    { word: "repollo", type: "noun", images: [
+    { word: "repollo", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/cabbage01.jpg" },
         { file: "images/cabbage02.jpg" },
         { file: "images/cabbage03.jpg" }
     ]},
-    { word: "pepino", type: "noun", images: [
+    { word: "pepino", type: "noun", themes: ["restaurant"],
+        images: [
         { file: "images/cucumber01.jpg" },
         { file: "images/cucumber02.jpg" },
         { file: "images/cucumber03.jpg" }
