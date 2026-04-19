@@ -281,6 +281,7 @@
             font-size: 12px;
         }
 
+
         #play-buttons {
             display: flex;
             gap: 8px;
@@ -348,6 +349,145 @@
             width: 100%;
             aspect-ratio: 1;
         }
+
+        #stats-screen {
+            width: 100%;
+            max-width: 360px;
+            padding: 12px 16px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #stats-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #stats-header h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.6rem;
+            color: #c94f1e;
+            margin: 0;
+        }
+
+        .stats-section-title {
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #bbb;
+            margin-bottom: 8px;
+        }
+
+        #stats-accuracy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .accuracy-card {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .accuracy-label {
+            font-size: 11px;
+            color: #bbb;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .accuracy-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #c94f1e;
+        }
+
+        #stats-words-section {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .stats-word-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .stats-word-row:last-child {
+            border-bottom: none;
+        }
+
+        .stats-word-label {
+            font-size: 11px;
+            color: #bbb;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            width: 48px;
+        }
+
+        .stats-word-name {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .stats-word-pct {
+            font-weight: 700;
+            color: #c94f1e;
+        }
+
+        #stats-chart-section {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        #chart-mode-toggle {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .chart-toggle-button {
+            flex: 1;
+            padding: 6px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: white;
+            font-size: 12px;
+            color: #888;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .chart-toggle-button.active {
+            background: #c94f1e;
+            color: white;
+            border-color: #c94f1e;
+        }
+
+        #accuracy-chart {
+            width: 100%;
+            height: 160px;
+        }
+
+        #stats-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
     </style>
 </head>
 <body>
@@ -373,7 +513,10 @@
                 <span>Verb Mode</span>
                 <span class="mode-arrow">▶</span>
             </button>
+
         </div>
+
+        <button class="secondary-button" onclick="showStats()" style="width:100%">📊 Stats</button>
 
         <div id="play-buttons" style="display:none">
             <button class="secondary-button" onclick="launchPreview()">👀 Preview & Play</button>
@@ -400,6 +543,67 @@
     <div id="preview-screen" style="display:none">
         <div id="preview-grid"></div>
         <button class="mode-button" onclick="startGame()" style="margin: 20px 0">▶️ Start Game</button>
+    </div>
+    <div id="stats-screen" style="display:none">
+        <div id="stats-header">
+            <button class="secondary-button" onclick="hideStats()">← Back</button>
+            <h2 id="stats-title">Your Stats</h2>
+        </div>
+
+        <div id="stats-content">
+            <div id="stats-accuracy-section">
+                <div class="stats-section-title">Accuracy</div>
+                <div id="stats-accuracy-grid">
+                    <div class="accuracy-card">
+                        <div class="accuracy-label">Overall</div>
+                        <div class="accuracy-value" id="stat-overall-accuracy">—</div>
+                    </div>
+                    <div class="accuracy-card">
+                        <div class="accuracy-label">Nouns</div>
+                        <div class="accuracy-value" id="stat-noun-accuracy">—</div>
+                    </div>
+                    <div class="accuracy-card">
+                        <div class="accuracy-label">Verbs</div>
+                        <div class="accuracy-value" id="stat-verb-accuracy">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="stats-words-section">
+                <div class="stats-section-title">Nouns</div>
+                <div class="stats-word-row">
+                    <span class="stats-word-label">Best</span>
+                    <span class="stats-word-name" id="stat-noun-best">—</span>
+                    <span class="stats-word-pct" id="stat-noun-best-pct">—</span>
+                </div>
+                <div class="stats-word-row">
+                    <span class="stats-word-label">Worst</span>
+                    <span class="stats-word-name" id="stat-noun-worst">—</span>
+                    <span class="stats-word-pct" id="stat-noun-worst-pct">—</span>
+                </div>
+                <div class="stats-section-title" style="margin-top:12px">Verbs</div>
+                <div class="stats-word-row">
+                    <span class="stats-word-label">Best</span>
+                    <span class="stats-word-name" id="stat-verb-best">—</span>
+                    <span class="stats-word-pct" id="stat-verb-best-pct">—</span>
+                </div>
+                <div class="stats-word-row">
+                    <span class="stats-word-label">Worst</span>
+                    <span class="stats-word-name" id="stat-verb-worst">—</span>
+                    <span class="stats-word-pct" id="stat-verb-worst-pct">—</span>
+                </div>
+            </div>
+
+            <div id="stats-chart-section">
+                <div class="stats-section-title">Accuracy Over Time</div>
+                <div id="chart-mode-toggle">
+                    <button class="chart-toggle-button active" onclick="setChartMode('all')">All</button>
+                    <button class="chart-toggle-button" onclick="setChartMode('noun')">Nouns</button>
+                    <button class="chart-toggle-button" onclick="setChartMode('verb')">Verbs</button>
+                </div>
+                <canvas id="accuracy-chart"></canvas>
+            </div>
+        </div>
     </div>
     <div id="hud" style="display:none">
         <span id="timer">1:45</span>
@@ -441,6 +645,7 @@
         const ROUND_SIZE = 90; // Must be a multiple of NUM_STACKS
         const LEARNED_ACCURACY = 0.95;
         const LEARNED_MIN_ATTEMPTS = 20;
+        const STATS_MIN_ATTEMPTS = 10;
 
         // --- Game State ---
         let stacks = { images: [], words: [] };
@@ -452,6 +657,8 @@
         let selectedMode = "noun";
         let layerTemplates = [];
         let confettiActive = false;
+        let misses = 0;
+        let chartMode = "all";
 
         function getWordProgress() {
             try {
@@ -479,6 +686,17 @@
                 w.attempts >= LEARNED_MIN_ATTEMPTS && 
                 (w.correct / w.attempts) >= LEARNED_ACCURACY
             ).length;
+        }
+
+        function recordSession(mode, correct, attempts) {
+            const history = JSON.parse(localStorage.getItem("sessionHistory")) || [];
+            history.push({
+                date: getTodayString(),
+                mode: mode,
+                correct: correct,
+                attempts: attempts
+            });
+            localStorage.setItem("sessionHistory", JSON.stringify(history));
         }
 
         function buildRound() {
@@ -680,6 +898,7 @@
         function handleMismatch(card1, card2) {
             card1.classList.add("wrong");
             card2.classList.add("wrong");
+            misses++;
             recordMatch(card2.dataset.type === "word" ? card2.dataset.word : card1.dataset.word, false);
             selected = null;
 
@@ -721,6 +940,8 @@
             gameActive = false;
             clearInterval(timerInterval);
             updatePlayStreak();
+            const accuracy = score / (score + misses);
+            recordSession(selectedMode, score, score + misses);
 
             const finalScore = score + timeLeft;
 
@@ -856,6 +1077,7 @@
         timeLeft = TOTAL_TIME;
         selected = null;
         gameActive = false;
+        misses = 0;
 
         // Hide end screen and confetti
         confettiActive = false;
@@ -918,6 +1140,149 @@
         document.getElementById("stat-words-learned").textContent = learnedCount;
         document.getElementById("stat-streak").textContent = playStreak;
     }
+
+    function showStats() {
+    buildStats();
+    document.getElementById("title-screen").style.display = "none";
+    document.getElementById("stats-screen").style.display = "flex";
+    document.getElementById("stats-screen").style.flexDirection = "column";
+}
+
+function hideStats() {
+    document.getElementById("stats-screen").style.display = "none";
+    document.getElementById("title-screen").style.display = "flex";
+    document.getElementById("title-screen").style.flexDirection = "column";
+}
+
+function setChartMode(mode) {
+    chartMode = mode;
+    document.querySelectorAll(".chart-toggle-button").forEach(b => b.classList.remove("active"));
+    event.target.classList.add("active");
+    drawChart();
+}
+
+function calcAccuracy(sessions, mode) {
+    const filtered = mode === "all" ? sessions : sessions.filter(s => s.mode === mode);
+    const correct = filtered.reduce((sum, s) => sum + s.correct, 0);
+    const attempts = filtered.reduce((sum, s) => sum + s.attempts, 0);
+    return attempts === 0 ? null : correct / attempts;
+}
+
+function formatPct(value) {
+    return value === null ? "—" : Math.round(value * 100) + "%";
+}
+
+function buildStats() {
+    const sessions = JSON.parse(localStorage.getItem("sessionHistory")) || [];
+    const progress = getWordProgress();
+
+    // Accuracy cards
+    document.getElementById("stat-overall-accuracy").textContent = formatPct(calcAccuracy(sessions, "all"));
+    document.getElementById("stat-noun-accuracy").textContent = formatPct(calcAccuracy(sessions, "noun"));
+    document.getElementById("stat-verb-accuracy").textContent = formatPct(calcAccuracy(sessions, "verb"));
+
+    // Best/worst words per mode
+    ["noun", "verb"].forEach(mode => {
+        const modeWords = words.filter(w => w.type === mode);
+        const qualified = modeWords
+            .filter(w => progress[w.word] && progress[w.word].attempts >= STATS_MIN_ATTEMPTS)
+            .map(w => ({
+                word: w.word,
+                accuracy: progress[w.word].correct / progress[w.word].attempts
+            }))
+            .sort((a, b) => b.accuracy - a.accuracy);
+
+        if (qualified.length > 0) {
+            const best = qualified[0];
+            const worst = qualified[qualified.length - 1];
+            document.getElementById(`stat-${mode}-best`).textContent = best.word;
+            document.getElementById(`stat-${mode}-best-pct`).textContent = formatPct(best.accuracy);
+            document.getElementById(`stat-${mode}-worst`).textContent = worst.word;
+            document.getElementById(`stat-${mode}-worst-pct`).textContent = formatPct(worst.accuracy);
+        }
+    });
+
+    drawChart();
+}
+
+function drawChart() {
+    const sessions = JSON.parse(localStorage.getItem("sessionHistory")) || [];
+    const canvas = document.getElementById("accuracy-chart");
+    const ctx = canvas.getContext("2d");
+    canvas.width = canvas.offsetWidth;
+    canvas.height = 160;
+
+    // Group by date
+    const byDate = {};
+    sessions.forEach(s => {
+        if (chartMode !== "all" && s.mode !== chartMode) return;
+        if (!byDate[s.date]) byDate[s.date] = { correct: 0, attempts: 0 };
+        byDate[s.date].correct += s.correct;
+        byDate[s.date].attempts += s.attempts;
+    });
+
+    const dates = Object.keys(byDate).sort();
+    const accuracies = dates.map(d => byDate[d].correct / byDate[d].attempts);
+
+    if (dates.length < 2) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#bbb";
+        ctx.font = "14px Nunito, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Not enough data yet", canvas.width / 2, canvas.height / 2);
+        return;
+    }
+
+    const pad = { top: 10, right: 10, bottom: 24, left: 36 };
+    const w = canvas.width - pad.left - pad.right;
+    const h = canvas.height - pad.top - pad.bottom;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Grid lines at 25%, 50%, 75%, 100%
+    [0.25, 0.5, 0.75, 1].forEach(pct => {
+        const y = pad.top + h - (pct * h);
+        ctx.beginPath();
+        ctx.strokeStyle = "#f0f0f0";
+        ctx.lineWidth = 1;
+        ctx.moveTo(pad.left, y);
+        ctx.lineTo(pad.left + w, y);
+        ctx.stroke();
+        ctx.fillStyle = "#bbb";
+        ctx.font = "10px Nunito, sans-serif";
+        ctx.textAlign = "right";
+        ctx.fillText(Math.round(pct * 100) + "%", pad.left - 4, y + 4);
+    });
+
+    // Line
+    ctx.beginPath();
+    ctx.strokeStyle = "#c94f1e";
+    ctx.lineWidth = 2;
+    accuracies.forEach((acc, i) => {
+        const x = pad.left + (i / (accuracies.length - 1)) * w;
+        const y = pad.top + h - (acc * h);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // Dots
+    accuracies.forEach((acc, i) => {
+        const x = pad.left + (i / (accuracies.length - 1)) * w;
+        const y = pad.top + h - (acc * h);
+        ctx.beginPath();
+        ctx.fillStyle = "#c94f1e";
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    // Date labels — just first and last
+    ctx.fillStyle = "#bbb";
+    ctx.font = "10px Nunito, sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText(dates[0].slice(5), pad.left, canvas.height - 4);
+    ctx.textAlign = "right";
+    ctx.fillText(dates[dates.length - 1].slice(5), pad.left + w, canvas.height - 4);
+}
 
     updateTitleStats();
 
