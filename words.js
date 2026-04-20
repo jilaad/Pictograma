@@ -271,91 +271,126 @@ const words = [
         { file: "images/lighting_like_fire03.jpg" },
         { file: "images/lighting_like_fire04.jpg" }
     ]},
-    { word: "chuletón", type: "noun", themes: ["restaurant"],
+    { word: "chuletón", type: "noun", themes: ["food"],
         images: [
         { file: "images/ribeye01.jpg" },
         { file: "images/ribeye02.jpg" },
         { file: "images/ribeye03.jpg" },
         { file: "images/ribeye04.jpg" }
     ]},
-    { word: "solomillo", type: "noun", themes: ["restaurant"],
+    { word: "solomillo", type: "noun", themes: ["food"],
         images: [
         { file: "images/sirloin01.jpg" },
         { file: "images/sirloin02.jpg" },
         { file: "images/sirloin03.jpg" },
         { file: "images/sirloin04.jpg" }
     ]},
-    { word: "ajo", type: "noun", themes: ["restaurant"],
+    { word: "ajo", type: "noun", themes: ["food"],
         images: [
         { file: "images/garlic01.jpg" },
         { file: "images/garlic02.jpg" },
         { file: "images/garlic03.jpg" }
     ]},
-    { word: "cebolla", type: "noun", themes: ["restaurant"],
+    { word: "cebolla", type: "noun", themes: ["food"],
         images: [
         { file: "images/onion01.jpg" },
         { file: "images/onion02.jpg" },
         { file: "images/onion03.jpg" },
         { file: "images/onion04.jpg" }
     ]},
-    { word: "mantequilla", type: "noun", themes: ["restaurant","kitchen"],
+    { word: "mantequilla", type: "noun", themes: ["food","kitchen"],
         images: [
         { file: "images/butter01.jpg" },
         { file: "images/butter02.jpg" },
         { file: "images/butter03.jpg" },
         { file: "images/butter04.jpg" }
     ]},
-    { word: "lechuga", type: "noun", themes: ["restaurant"],
+    { word: "lechuga", type: "noun", themes: ["food"],
         images: [
         { file: "images/lettuce01.jpg" },
         { file: "images/lettuce02.jpg" },
         { file: "images/lettuce03.jpg" },
         { file: "images/lettuce04.jpg" }
     ]},
-    { word: "zanahoria", type: "noun", themes: ["restaurant"],
+    { word: "zanahoria", type: "noun", themes: ["food"],
         images: [
         { file: "images/carrot01.jpg" },
         { file: "images/carrot02.jpg" },
         { file: "images/carrot03.jpg" },
         { file: "images/carrot04.jpg" }
     ]},
-    { word: "champiñón", type: "noun", themes: ["restaurant"],
+    { word: "champiñón", type: "noun", themes: ["food"],
         images: [
         { file: "images/mushroom01.jpg" },
         { file: "images/mushroom02.jpg" },
         { file: "images/mushroom03.jpg" },
         { file: "images/mushroom04.jpg" }
     ]},
-    { word: "maíz", type: "noun", themes: ["restaurant"],
+    { word: "maíz", type: "noun", themes: ["food"],
         images: [
         { file: "images/corn01.jpg" },
         { file: "images/corn02.jpg" },
         { file: "images/corn03.jpg" },
         { file: "images/corn04.jpg" }
     ]},
-    { word: "pimiento", type: "noun", themes: ["restaurant"],
+    { word: "pimiento", type: "noun", themes: ["food"],
         images: [
         { file: "images/bell_pepper01.jpg" },
         { file: "images/bell_pepper02.jpg" },
         { file: "images/chili_pepper01.jpg" },
         { file: "images/chili_pepper02.jpg" }
     ]},
-    { word: "pimienta", type: "noun", themes: ["restaurant","kitchen"],
+    { word: "pimienta", type: "noun", themes: ["food","kitchen"],
         images: [
         { file: "images/black_pepper01.jpg" },
         { file: "images/black_pepper02.jpg" },
         { file: "images/black_pepper03.jpg" }
     ]},
-    { word: "repollo", type: "noun", themes: ["restaurant"],
+    { word: "repollo", type: "noun", themes: ["food"],
         images: [
         { file: "images/cabbage01.jpg" },
         { file: "images/cabbage02.jpg" },
         { file: "images/cabbage03.jpg" }
     ]},
-    { word: "pepino", type: "noun", themes: ["restaurant"],
+    { word: "pepino", type: "noun", themes: ["food"],
         images: [
         { file: "images/cucumber01.jpg" },
         { file: "images/cucumber02.jpg" },
         { file: "images/cucumber03.jpg" }
+    ]},
+    { word: "pollo", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/chicken_food01.jpg" },
+        { file: "images/chicken_food02.jpg" },
+        { file: "images/chicken_food03.jpg" },
+        { file: "images/chicken_food04.jpg" }
+    ]},
+    { word: "queso", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/cheese01.jpg" },
+        { file: "images/cheese02.jpg" },
+        { file: "images/cheese03.jpg" },
+        { file: "images/cheese04.jpg" }
+    ]},
+    { word: "aguacate", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/avocado01.jpg" },
+        { file: "images/avocado02.jpg" },
+        { file: "images/avocado03.jpg" },
+        { file: "images/avocado04.jpg" }
+    ]},
+    { word: "frijoles", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/beans01.jpg" },
+        { file: "images/beans02.jpg" },
+        { file: "images/beans03.jpg" },
+        { file: "images/beans04.jpg" }
+    ]},
+    { word: "jitomate", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/tomato01.jpg" },
+        { file: "images/tomato02.jpg" },
+        { file: "images/tomato03.jpg" },
+        { file: "images/tomato04.jpg" }
     ]}
 ];
