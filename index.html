@@ -522,8 +522,6 @@
             </select>
         </div>
 
-        <button class="secondary-button" onclick="showStats()" style="width:100%">📊 Stats</button>
-
         <div id="play-buttons" style="display:none">
             <button class="secondary-button" onclick="launchPreview()">👀 Preview & Play</button>
             <button class="secondary-button" onclick="startGame()">▶ Play</button>
@@ -545,6 +543,8 @@
                 <div class="stat-label-small">day streak</div>
             </div>
         </div>
+
+        <button class="secondary-button" onclick="showStats()" style="width:100%">📊 Stats</button>
     </div>
     <div id="preview-screen" style="display:none">
         <div id="preview-grid"></div>
@@ -1246,7 +1246,7 @@ function buildStats() {
         }
     });
 
-    drawChart();
+    setTimeout(() => drawChart(), 0);
 }
 
 function drawChart() {
