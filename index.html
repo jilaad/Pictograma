@@ -488,6 +488,148 @@
             flex-direction: column;
             gap: 16px;
         }
+
+        #dev-screen {
+            width: 100%;
+            max-width: 360px;
+            padding: 12px 16px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        #dev-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #dev-header h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.6rem;
+            color: #2a7fc9;
+            margin: 0;
+        }
+
+        #dev-counts {
+            background: white;
+            border-radius: 12px;
+            padding: 14px 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .dev-count-line {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        #dev-filters {
+            display: flex;
+            gap: 8px;
+        }
+
+        #dev-filters select {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.9rem;
+            color: #555;
+            background: white;
+            cursor: pointer;
+        }
+
+        #dev-browser {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dev-word-row {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .dev-word-header {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .dev-word-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .dev-word-type {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .dev-word-type.noun {
+            background: #fde8e0;
+            color: #c94f1e;
+        }
+
+        .dev-word-type.verb {
+            background: #deeef9;
+            color: #2a7fc9;
+        }
+
+        .dev-word-themes {
+            font-size: 11px;
+            color: #bbb;
+            margin-bottom: 8px;
+        }
+
+        .dev-image-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .dev-image-thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .dev-image-thumb:active {
+            border-color: #2a7fc9;
+        }
+
+        #dev-filename-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.75);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            z-index: 200;
+            max-width: 90%;
+            text-align: center;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -496,7 +638,7 @@
             <div id="title-subtitle-top">learn spanish</div>
             <div id="title-wordmark">
                 <span>🇪🇸</span>
-                <h1>Pictograma</h1>
+                <h1 onclick="handleTitleTap()">Pictograma</h1>
                 <span>🇲🇽</span>
             </div>
             <div id="title-subtitle-bottom">image · word · meaning</div>
@@ -611,6 +753,33 @@
             </div>
         </div>
     </div>
+    <div id="dev-screen" style="display:none">
+        <div id="dev-header">
+            <button class="secondary-button" onclick="hideDevScreen()">← Back</button>
+            <h2 id="dev-title">🔧 Dev Mode</h2>
+        </div>
+
+        <div id="dev-counts">
+            <div id="dev-total-count" class="dev-count-line"></div>
+            <div id="dev-type-counts" class="dev-count-line"></div>
+            <div id="dev-theme-counts" class="dev-count-line"></div>
+        </div>
+
+        <div id="dev-filters">
+            <select id="dev-type-filter" onchange="buildDevBrowser()">
+                <option value="all">All Types</option>
+                <option value="noun">Nouns</option>
+                <option value="verb">Verbs</option>
+            </select>
+            <select id="dev-theme-filter" onchange="buildDevBrowser()">
+                <option value="all">All Themes</option>
+            </select>
+        </div>
+
+        <div id="dev-browser"></div>
+
+        <div id="dev-filename-toast" style="display:none"></div>
+    </div>
     <div id="hud" style="display:none">
         <span id="timer">1:45</span>
         <span id="score">Matches: 0</span>
@@ -666,6 +835,8 @@
         let confettiActive = false;
         let misses = 0;
         let chartMode = "all";
+        let titleTapCount = 0;
+        let titleTapTimer = null;
 
         function getWordProgress() {
             try {
@@ -1326,6 +1497,151 @@ function drawChart() {
     ctx.fillText(dates[0].slice(5), pad.left, canvas.height - 4);
     ctx.textAlign = "right";
     ctx.fillText(dates[dates.length - 1].slice(5), pad.left + w, canvas.height - 4);
+}
+
+
+function handleTitleTap() {
+    titleTapCount++;
+    clearTimeout(titleTapTimer);
+    titleTapTimer = setTimeout(() => {
+        titleTapCount = 0;
+    }, 2000);
+
+    if (titleTapCount >= 5) {
+        titleTapCount = 0;
+        clearTimeout(titleTapTimer);
+        showDevScreen();
+    }
+}
+
+function showDevScreen() {
+    populateDevThemeFilter();
+    buildDevCounts();
+    buildDevBrowser();
+    document.getElementById("title-screen").style.display = "none";
+    document.getElementById("dev-screen").style.display = "flex";
+    document.getElementById("dev-screen").style.flexDirection = "column";
+}
+
+function hideDevScreen() {
+    document.getElementById("dev-screen").style.display = "none";
+    document.getElementById("title-screen").style.display = "flex";
+    document.getElementById("title-screen").style.flexDirection = "column";
+}
+
+function populateDevThemeFilter() {
+    const select = document.getElementById("dev-theme-filter");
+    select.innerHTML = '<option value="all">All Themes</option>';
+    const themeSet = new Set();
+    words.forEach(w => {
+        if (w.themes) w.themes.forEach(t => themeSet.add(t));
+    });
+    [...themeSet].sort().forEach(theme => {
+        const option = document.createElement("option");
+        option.value = theme;
+        option.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+        select.appendChild(option);
+    });
+}
+
+function getDevFiltered() {
+    const typeFilter = document.getElementById("dev-type-filter").value;
+    const themeFilter = document.getElementById("dev-theme-filter").value;
+    return words.filter(w => {
+        if (typeFilter !== "all" && w.type !== typeFilter) return false;
+        if (themeFilter !== "all" && (!w.themes || !w.themes.includes(themeFilter))) return false;
+        return true;
+    });
+}
+
+function buildDevCounts() {
+    const total = words.length;
+    const filtered = getDevFiltered().length;
+
+    // Type counts
+    const typeCounts = {};
+    words.forEach(w => {
+        typeCounts[w.type] = (typeCounts[w.type] || 0) + 1;
+    });
+    const typeString = Object.entries(typeCounts)
+        .sort()
+        .map(([type, count]) => `${count} ${type}s`)
+        .join(", ");
+
+    // Theme counts
+    const themeCounts = {};
+    words.forEach(w => {
+        if (w.themes) w.themes.forEach(t => {
+            themeCounts[t] = (themeCounts[t] || 0) + 1;
+        });
+    });
+    const themeString = Object.entries(themeCounts)
+        .sort()
+        .map(([theme, count]) => `${theme}: ${count}`)
+        .join(", ");
+
+    document.getElementById("dev-total-count").textContent = 
+        `${total} words total, ${filtered} words filtered`;
+    document.getElementById("dev-type-counts").textContent = typeString;
+    document.getElementById("dev-theme-counts").textContent = themeString;
+}
+
+function buildDevBrowser() {
+    buildDevCounts();
+    const filtered = getDevFiltered();
+    const browser = document.getElementById("dev-browser");
+    browser.innerHTML = "";
+
+    filtered.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "dev-word-row";
+
+        const header = document.createElement("div");
+        header.className = "dev-word-header";
+
+        const name = document.createElement("span");
+        name.className = "dev-word-name";
+        name.textContent = item.word;
+
+        const type = document.createElement("span");
+        type.className = `dev-word-type ${item.type}`;
+        type.textContent = item.type;
+
+        header.appendChild(name);
+        header.appendChild(type);
+        row.appendChild(header);
+
+        if (item.themes && item.themes.length > 0) {
+            const themes = document.createElement("div");
+            themes.className = "dev-word-themes";
+            themes.textContent = item.themes.join(", ");
+            row.appendChild(themes);
+        }
+
+        const imageRow = document.createElement("div");
+        imageRow.className = "dev-image-row";
+
+        item.images.forEach(img => {
+            const thumb = document.createElement("img");
+            thumb.className = "dev-image-thumb";
+            thumb.src = img.file;
+            thumb.addEventListener("click", () => showFilenameToast(img.file));
+            imageRow.appendChild(thumb);
+        });
+
+        row.appendChild(imageRow);
+        browser.appendChild(row);
+    });
+}
+
+function showFilenameToast(filename) {
+    const toast = document.getElementById("dev-filename-toast");
+    toast.textContent = filename;
+    toast.style.display = "block";
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => {
+        toast.style.display = "none";
+    }, 3000);
 }
 
     updateTitleStats();

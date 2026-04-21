@@ -225,7 +225,6 @@ const words = [
     { word: "cenar", type: "verb", themes: ["restaurant"],
         images: [
         { file: "images/dinnering01.jpg" },
-        { file: "images/dinnering02.jpg" },
         { file: "images/dinnering03.jpg" },
         { file: "images/dinnering04.jpg" }
     ]},
