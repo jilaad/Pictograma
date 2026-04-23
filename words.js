@@ -1,5 +1,6 @@
 const words = [
-    { word: "cajón", type: "noun", images: [
+    { word: "cajón", type: "noun", themes: ["kitchen"],
+        images: [
         { file: "images/drawer01.jpg" },
         { file: "images/drawer02.jpg" },
         { file: "images/drawer03.jpg" },
@@ -391,5 +392,50 @@ const words = [
         { file: "images/tomato02.jpg" },
         { file: "images/tomato03.jpg" },
         { file: "images/tomato04.jpg" }
+    ]},
+    { word: "papa", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/potato01.jpg" },
+        { file: "images/potato02.jpg" },
+        { file: "images/potato03.jpg" },
+        { file: "images/potato04.jpg" }
+    ]},
+    { word: "mayonesa", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/mayo01.jpg" },
+        { file: "images/mayo02.jpg" }
+    ]},
+    { word: "huevo", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/egg01.jpg" },
+        { file: "images/egg02.jpg" },
+        { file: "images/egg03.jpg" },
+        { file: "images/egg04.jpg" }
+    ]},
+    { word: "miel", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/honey01.jpg" },
+        { file: "images/honey02.jpg" },
+        { file: "images/honey03.jpg" }
+    ]},
+    { word: "mostaza", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/mustard01.jpg" },
+        { file: "images/mustard02.jpg" },
+        { file: "images/mustard03.jpg" }
+    ]},
+    { word: "café", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/coffee01.jpg" },
+        { file: "images/coffee02.jpg" },
+        { file: "images/coffee03.jpg" },
+        { file: "images/coffee04.jpg" }
+    ]},
+    { word: "tocino", type: "noun", themes: ["food"],
+        images: [
+        { file: "images/bacon01.jpg" },
+        { file: "images/bacon02.jpg" },
+        { file: "images/bacon03.jpg" },
+        { file: "images/bacon04.jpg" }
     ]}
 ];

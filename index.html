@@ -884,20 +884,16 @@
                 return w.themes && w.themes.includes(selectedTheme);
             });
             
-            // Determine subset size - target 30, biggest multiple of 5 that's <= 30 and <= bank size
             const maxSubset = Math.min(30, filtered.length);
             const subsetSize = Math.floor(maxSubset / NUM_STACKS) * NUM_STACKS;
             
-            // Build synonym-safe word subset
             const subset = [];
             const candidates = [...filtered].sort(() => Math.random() - 0.5);
             
             for (const candidate of candidates) {
                 if (subset.length >= subsetSize) break;
                 
-                // Bidirectional synonym check
                 const candidateAccepts = candidate.images.flatMap(img => img.accepts || [candidate.word]);
-                
                 const conflict = subset.some(chosen => {
                     const chosenAccepts = chosen.images.flatMap(img => img.accepts || [chosen.word]);
                     return candidateAccepts.includes(chosen.word) || 
@@ -907,14 +903,41 @@
                 if (!conflict) subset.push(candidate);
             }
             
-            // Assign fixed stack positions - divide subset into layer templates
-            // Shuffle subset first so stack assignment is random
             const shuffledSubset = [...subset].sort(() => Math.random() - 0.5);
             
-            // Build layer templates - each is an array of NUM_STACKS words
             layerTemplates = [];
             for (let i = 0; i < shuffledSubset.length; i += NUM_STACKS) {
-                layerTemplates.push(shuffledSubset.slice(i, i + NUM_STACKS));
+                const layerWords = shuffledSubset.slice(i, i + NUM_STACKS);
+                
+                // Assign fixed word positions for this layer with max 1 adjacency
+                let wordPositions;
+                let attempts = 0;
+                do {
+                    wordPositions = [...Array(NUM_STACKS).keys()].sort(() => Math.random() - 0.5);
+                    const adjacencies = wordPositions.filter((wp, imagePos) => wp === imagePos).length;
+                    if (adjacencies <= 1) break;
+                    
+                    const matchingPositions = wordPositions.reduce((acc, wp, imagePos) => {
+                        if (wp === imagePos) acc.push(imagePos);
+                        return acc;
+                    }, []);
+                    const swapFrom = matchingPositions[Math.floor(Math.random() * matchingPositions.length)];
+                    const nonMatching = wordPositions.reduce((acc, wp, imagePos) => {
+                        if (wp !== imagePos) acc.push(imagePos);
+                        return acc;
+                    }, []);
+                    const swapTo = nonMatching[Math.floor(Math.random() * nonMatching.length)];
+                    [wordPositions[swapFrom], wordPositions[swapTo]] = 
+                        [wordPositions[swapTo], wordPositions[swapFrom]];
+                    attempts++;
+                } while (attempts < 10);
+
+                // Store each word with its fixed image position (idx) and fixed word position
+                layerTemplates.push(layerWords.map((word, idx) => ({
+                    ...word,
+                    imageStack: idx,
+                    wordStack: wordPositions[idx]
+                })));
             }
         }
 
@@ -937,7 +960,6 @@
                     
                     // Make sure first layer of new shuffle doesn't match current top layer
                     if (topLayerTemplate && shuffledLayers[0] === topLayerTemplate && shuffledLayers.length > 1) {
-                        // Swap with a random other layer
                         const swapIdx = Math.floor(Math.random() * (shuffledLayers.length - 1)) + 1;
                         [shuffledLayers[0], shuffledLayers[swapIdx]] = 
                             [shuffledLayers[swapIdx], shuffledLayers[0]];
@@ -947,20 +969,16 @@
                 const layer = shuffledLayers[layerIndex++];
                 topLayerTemplate = layer;
                 
-                // Shuffle word positions within this layer for the word deck
-                const wordPositions = [...Array(NUM_STACKS).keys()].sort(() => Math.random() - 0.5);
-                
-                layer.forEach((item, idx) => {
-                    // Pick random image for this appearance
+                layer.forEach((item) => {
                     const randomImage = item.images[Math.floor(Math.random() * item.images.length)];
                     const accepts = randomImage.accepts || [item.word];
                     
-                    imageDeck[idx].push({
+                    imageDeck[item.imageStack].push({
                         word: item.word,
                         file: randomImage.file,
                         accepts: accepts
                     });
-                    wordDeck[wordPositions[idx]].push({
+                    wordDeck[item.wordStack].push({
                         word: item.word,
                         file: randomImage.file,
                         accepts: accepts
