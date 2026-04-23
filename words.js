@@ -437,5 +437,73 @@ const words = [
         { file: "images/bacon02.jpg" },
         { file: "images/bacon03.jpg" },
         { file: "images/bacon04.jpg" }
+    ]},
+    { word: "gabinete", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/cabinet01.jpg" },
+        { file: "images/cabinet02.jpg" },
+        { file: "images/cabinet03.jpg" },
+        { file: "images/cabinet04.jpg" }
+    ]},
+    { word: "estufa", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/stove01.jpg" },
+        { file: "images/stove02.jpg" },
+        { file: "images/stove03.jpg" },
+        { file: "images/stove04.jpg" }
+    ]},
+    { word: "microondas", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/microwave01.jpg" },
+        { file: "images/microwave02.jpg" },
+        { file: "images/microwave03.jpg" }
+    ]},
+    { word: "nevera", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/refrigerator01.jpg", accepts: ["nevera","refrigerador"]},
+        { file: "images/refrigerator02.jpg", accepts: ["nevera","refrigerador"] },
+        { file: "images/refrigerator03.jpg", accepts: ["nevera","refrigerador"] },
+        { file: "images/refrigerator04.jpg", accepts: ["nevera","refrigerador"] }
+    ]},
+    { word: "refrigerador", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/refrigerator01.jpg", accepts: ["nevera","refrigerador"] },
+        { file: "images/refrigerator02.jpg", accepts: ["nevera","refrigerador"] },
+        { file: "images/refrigerator03.jpg", accepts: ["nevera","refrigerador"] },
+        { file: "images/refrigerator04.jpg", accepts: ["nevera","refrigerador"] }
+    ]},
+    { word: "congelador", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/freezer01.jpg" },
+        { file: "images/freezer02.jpg" },
+        { file: "images/freezer04.png" }
+    ]},
+    { word: "lavavajillas", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/dishwasher01.jpg" },
+        { file: "images/dishwasher02.jpg" },
+        { file: "images/dishwasher03.jpg" },
+        { file: "images/dishwasher04.jpg" }
+    ]},
+    { word: "tostadora", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/toaster01.jpg" },
+        { file: "images/toaster02.jpg" },
+        { file: "images/toaster03.jpg" },
+        { file: "images/toaster04.jpg" }
+    ]},
+    { word: "licuadora", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/blender01.jpg" },
+        { file: "images/blender02.jpg" },
+        { file: "images/blender03.jpg" },
+        { file: "images/blender04.jpg" }
+    ]},
+    { word: "sartén", type: "noun", themes: ["kitchen"],
+        images: [
+        { file: "images/pan01.jpg" },
+        { file: "images/pan02.jpg" },
+        { file: "images/pan03.jpg" },
+        { file: "images/pan04.jpg" }
     ]}
 ];
