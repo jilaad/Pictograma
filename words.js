@@ -505,5 +505,88 @@ const words = [
         { file: "images/pan02.jpg" },
         { file: "images/pan03.jpg" },
         { file: "images/pan04.jpg" }
+    ]},
+    { word: "tierra", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/dirt01.jpg" },
+        { file: "images/dirt02.jpg" },
+        { file: "images/dirt03.jpg" },
+        { file: "images/dirt04.jpg" }
+    ]},
+    { word: "bloque", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/block01.jpg" },
+        { file: "images/block02.jpg" },
+        { file: "images/block03.jpg" }
+    ]},
+    { word: "casa", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/house01.jpg" },
+        { file: "images/house02.jpg" },
+        { file: "images/house03.jpg" },
+        { file: "images/house04.jpg" }
+    ]},
+    { word: "cueva", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/cave01.jpg" },
+        { file: "images/cave02.jpg" },
+        { file: "images/cave03.jpg" },
+        { file: "images/cave04.jpg" }
+    ]},
+    { word: "espada", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/sword01.jpg" },
+        { file: "images/sword02.jpg" },
+        { file: "images/sword03.jpg" },
+        { file: "images/sword04.jpg" }
+    ]},
+    { word: "pala", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/shovel01.jpg" },
+        { file: "images/shovel02.jpg" },
+        { file: "images/shovel03.jpg" },
+        { file: "images/shovel04.jpg" }
+    ]},
+    { word: "azada", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/hoe01.jpg" },
+        { file: "images/hoe02.jpg" },
+        { file: "images/hoe03.jpg" }
+    ]},
+    { word: "hacha", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/axe01.jpg" },
+        { file: "images/axe02.jpg" },
+        { file: "images/axe03.jpg" },
+        { file: "images/axe04.jpg" }
+    ]},
+    { word: "pico", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/pickaxe01.jpg" },
+        { file: "images/pickaxe02.jpg" }
+    ]},
+    { word: "carbón", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/coal01.jpg" },
+        { file: "images/coal02.jpg" }
+    ]},
+    { word: "hierro", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/iron_metal01.jpg" },
+        { file: "images/iron_metal02.jpg" },
+        { file: "images/iron_metal03.jpg" }
+    ]},
+    { word: "diamante", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/diamond01.jpg" },
+        { file: "images/diamond02.jpg" },
+        { file: "images/diamond03.jpg" }
+    ]},
+    { word: "cobre", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/copper01.jpg" },
+        { file: "images/copper02.jpg" },
+        { file: "images/copper03.jpg" },
+        { file: "images/copper04.jpg" }
     ]}
 ];
