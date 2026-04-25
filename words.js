@@ -13,13 +13,15 @@ const words = [
         { file: "images/oven03.jpg" },
         { file: "images/oven04.jpg" }
     ]},
-    { word: "mariposa", type: "noun", images: [
+    { word: "mariposa", type: "noun", themes: ["animals"],
+        images: [
         { file: "images/butterfly01.jpg" },
         { file: "images/butterfly02.jpg" },
         { file: "images/butterfly03.jpg" },
         { file: "images/butterfly04.jpg" }
     ]},
-    { word: "perro", type: "noun", images: [
+    { word: "perro", type: "noun", themes: ["animals"],
+        images: [
         { file: "images/dog01.jpg" },
         { file: "images/dog02.jpg" },
         { file: "images/dog03.jpg" },
@@ -588,5 +590,71 @@ const words = [
         { file: "images/copper02.jpg" },
         { file: "images/copper03.jpg" },
         { file: "images/copper04.jpg" }
+    ]},
+    { word: "piedra", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/stone01.jpg" },
+        { file: "images/stone02.jpg" },
+        { file: "images/stone03.jpg" },
+        { file: "images/stone04.jpg" }
+    ]},
+    { word: "pared", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/wall01.jpg" },
+        { file: "images/wall02.jpg" },
+        { file: "images/wall03.jpg" },
+        { file: "images/wall04.jpg" }
+    ]},
+    { word: "piso", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/floor_surface01.jpg" },
+        { file: "images/floor_surface02.jpg" },
+        { file: "images/floor_surface03.jpg" },
+        { file: "images/floor_surface04.jpg" }
+    ]},
+    { word: "techo", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/roof01.jpg" },
+        { file: "images/roof02.jpg" },
+        { file: "images/roof03.jpg" },
+        { file: "images/roof04.jpg" }
+    ]},
+    { word: "losa", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/slab01.jpg" },
+        { file: "images/slab02.jpg" },
+        { file: "images/slab03.jpg" },
+        { file: "images/slab04.jpg" }
+    ]},
+    { word: "vaca", type: "noun", themes: ["minecraft","animals"],
+        images: [
+        { file: "images/cow01.jpg" },
+        { file: "images/cow02.jpg" },
+        { file: "images/cow03.jpg" },
+        { file: "images/cow04.jpg" }
+    ]},
+    { word: "oveja", type: "noun", themes: ["minecraft","animals"],
+        images: [
+        { file: "images/sheep01.jpg" },
+        { file: "images/sheep02.jpg" },
+        { file: "images/sheep03.jpg" }
+    ]},
+    { word: "cerdo", type: "noun", themes: ["minecraft","animals"],
+        images: [
+        { file: "images/pig01.jpg" },
+        { file: "images/pig02.jpg" },
+        { file: "images/pig03.jpg" },
+        { file: "images/pig04.jpg" }
+    ]},
+    { word: "río", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/river01.jpg" },
+        { file: "images/river02.jpg" }
+    ]},
+    { word: "montaña", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/mountain01.jpg" },
+        { file: "images/mountain02.jpg" },
+        { file: "images/mountain03.jpg" }
     ]}
 ];
