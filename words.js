@@ -198,7 +198,7 @@ const words = [
         { file: "images/kitchen03.jpg" },
         { file: "images/kitchen04.jpg" }
     ]},
-    { word: "baño", type: "noun", themes: ["restaurant"],
+    { word: "baño", type: "noun", themes: ["restaurant","hotel"],
         images: [
         { file: "images/bathroom01.jpg" },
         { file: "images/bathroom02.jpg" },
@@ -656,5 +656,119 @@ const words = [
         { file: "images/mountain01.jpg" },
         { file: "images/mountain02.jpg" },
         { file: "images/mountain03.jpg" }
+    ]},
+    { word: "arena", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/sand01.jpg" },
+        { file: "images/sand02.jpg" },
+        { file: "images/sand03.jpg" }
+    ]},
+    { word: "trigo", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/wheat01.jpg" },
+        { file: "images/wheat02.jpg" },
+        { file: "images/wheat03.jpg" }
+    ]},
+    { word: "alga", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/kelp01.jpg" },
+        { file: "images/kelp02.jpg" },
+        { file: "images/kelp03.jpg" }
+    ]},
+    { word: "antorcha", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/torch01.jpg" },
+        { file: "images/torch02.jpg" },
+        { file: "images/torch03.jpg" }
+    ]},
+    { word: "nieve", type: "noun", themes: ["minecraft","weather"],
+        images: [
+        { file: "images/snow01.jpg" },
+        { file: "images/snow02.jpg" },
+        { file: "images/snow03.jpg" }
+    ]},
+    { word: "árbol", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/tree01.jpg" },
+        { file: "images/tree02.jpg" },
+        { file: "images/tree03.jpg" },
+        { file: "images/tree04.jpg" }
+    ]},
+    { word: "madera", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/wood01.jpg" },
+        { file: "images/wood02.jpg" },
+        { file: "images/wood03.jpg" }
+    ]},
+    { word: "arco", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/bow_weapon01.jpg" },
+        { file: "images/bow_weapon02.jpg" },
+        { file: "images/bow_weapon03.jpg" },
+        { file: "images/bow_weapon04.jpg" }
+    ]},
+    { word: "flecha", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/arrow01.jpg" },
+        { file: "images/arrow02.jpg" },
+        { file: "images/arrow03.jpg" }
+    ]},
+    { word: "escudo", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/shield01.jpg" },
+        { file: "images/shield02.jpg" },
+        { file: "images/shield03.jpg" },
+        { file: "images/shield04.jpg" }
+    ]},
+    { word: "cofre", type: "noun", themes: ["hotels"],
+        images: [
+        { file: "images/safe_vault01.jpg" },
+        { file: "images/safe_vault02.jpg" },
+        { file: "images/safe_vault03.jpg" },
+        { file: "images/safe_vault04.jpg" }
+    ]},
+    { word: "cofre", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/chest_treasure01.jpg" },
+        { file: "images/chest_treasure02.jpg" },
+        { file: "images/chest_treasure03.jpg" },
+        { file: "images/chest_treasure04.jpg" }
+    ]},
+    { word: "cubo", type: "noun", themes: ["minecraft"],
+        images: [
+        { file: "images/bucket01.jpg" },
+        { file: "images/bucket02.jpg" },
+        { file: "images/bucket03.jpg" },
+        { file: "images/bucket04.jpg" }
+    ]},
+    { word: "araña", type: "noun", themes: ["minecraft","animals"],
+        images: [
+        { file: "images/spider01.jpg" },
+        { file: "images/spider02.jpg" }
+    ]},
+    { word: "cavar", type: "verb", themes: ["minecraft"],
+        images: [
+        { file: "images/to_dig01.jpg" },
+        { file: "images/to_dig02.jpg" },
+        { file: "images/to_dig03.jpg" },
+        { file: "images/to_dig04.jpg" }
+    ]},
+    { word: "saltar", type: "verb", themes: ["minecraft"],
+        images: [
+        { file: "images/to_jump01.jpg" },
+        { file: "images/to_jump02.jpg" },
+        { file: "images/to_jump03.jpg" },
+        { file: "images/to_jump04.jpg" }
+    ]},
+    { word: "agarrar", type: "verb", themes: ["minecraft"],
+        images: [
+        { file: "images/to_grab01.jpg" },
+        { file: "images/to_grab02.jpg" }
+    ]},
+    { word: "recoger", type: "verb", themes: ["minecraft"],
+        images: [
+        { file: "images/to_pick_up_from_ground01.jpg" },
+        { file: "images/to_pick_up_from_ground02.jpg" },
+        { file: "images/to_pick_up_from_ground03.jpg" }
     ]}
 ];
